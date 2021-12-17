@@ -33,8 +33,13 @@ public class CityService {
 
 	public City save(CreateCityDTO dto) {
 		City city =  new City(dto.getName(), dto.getWeather());
-		return cityRepository.save(city);
+		return cityRepository.save(fahrenheitCalculator(city));
 	}
-	
+
+	//calculate weather in fahrenheit
+	public City fahrenheitCalculator(City city) {
+		city.setFahrenheit((city.getWeather()*9/5)+32);
+		return city;
+	}
 
 }
